@@ -3,7 +3,7 @@ import 'package:flutter_app_ricky_morty_prueba/config/provider/EpisodeRickyAndMo
 import 'package:flutter_app_ricky_morty_prueba/domain/models/EpisodeRickAndMorty/EpisodeRickyAndMorty.dart';
 import 'package:flutter_app_ricky_morty_prueba/domain/models/locationRickyAndMorty/locationRickyAndMorty.dart';
 import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/LocationSearchDelegate.dart';
-import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_detalle_location.dart';
+import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_detalle_RickyAndMorty.dart';
 import 'package:provider/provider.dart';
 
 class HomeEpisodeRickyAndMorty extends StatefulWidget {

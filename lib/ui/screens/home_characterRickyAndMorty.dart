@@ -3,7 +3,7 @@ import 'package:flutter_app_ricky_morty_prueba/config/provider/CharacterRickyAnd
 import 'package:flutter_app_ricky_morty_prueba/domain/models/characterRickyAndMorty/characterRickyAndMorty.dart';
 import 'package:flutter_app_ricky_morty_prueba/domain/models/locationRickyAndMorty/locationRickyAndMorty.dart';
 import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/LocationSearchDelegate.dart';
-import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_detalle_location.dart';
+import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_detalle_RickyAndMorty.dart';
 import 'package:provider/provider.dart';
 
 class HomeCharacterRickyAndMorty extends StatefulWidget {
@@ -25,7 +25,17 @@ class _HomeCharacterRickyAndMortyState
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Personajes Ricky And Morty APP"),
+        title: Row(
+          children: [
+            Image.asset(
+             'config/asset/imagenes/app_bar.png',
+              scale: 12,
+            ),
+            const SizedBox(
+              width: 10,
+            )
+          ],
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -90,32 +100,10 @@ class _HomeCharacterRickyAndMortyState
                                     ),
                                   ),
                                   Text(
-                                    characterRickyAndMorty.origin.name,
+                                    characterRickyAndMorty.status.name,
                                     style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
                                       fontSize: 18,
                                     ),
-                                  ),
-                                  Text(
-                                    characterRickyAndMorty.species.name,
-                                    style: const TextStyle(fontSize: 15),
-                                  ),
-                                  Text(
-                                    characterRickyAndMorty.status.name,
-                                    style: const TextStyle(fontSize: 15),
-                                  ),
-
-                                  Text(
-                                    characterRickyAndMorty.type,
-                                    style: const TextStyle(fontSize: 15),
-                                  ),
-                                  Text(
-                                    characterRickyAndMorty.gender.name,
-                                    style: const TextStyle(fontSize: 15),
-                                  ),
-                                  Text(
-                                    characterRickyAndMorty.created.toString(),
-                                    style: const TextStyle(fontSize: 15),
                                   ),
                                   // const Text(
                                   //   "Episodios:",
