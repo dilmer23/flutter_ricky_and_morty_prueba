@@ -1,6 +1,6 @@
+import 'package:flutter_app_ricky_morty_prueba/data/driver_adapter/errors/rickyAndMortyLocation_api_errors.dart';
 import 'package:flutter_app_ricky_morty_prueba/domain/models/locationRickyAndMorty/geteway/rickyAndMorty_geteway.dart';
 import 'package:flutter_app_ricky_morty_prueba/domain/models/locationRickyAndMorty/locationRickyAndMorty.dart';
-import 'package:flutter_app_ricky_morty_prueba/infraestructure/driver_adapter/errors/rickyAndMortyLocation_api_errors.dart';
 import 'package:http/http.dart' as http;
 
 class LocationRickyAndMortyApi extends LocationRickyAndMortyGateway {
