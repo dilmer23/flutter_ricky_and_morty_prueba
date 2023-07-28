@@ -17,18 +17,10 @@
 
 ![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/github/forks/pandao/editor.md.svg) ![](https://img.shields.io/github/tag/pandao/editor.md.svg) ![](https://img.shields.io/github/release/pandao/editor.md.svg) ![](https://img.shields.io/github/issues/pandao/editor.md.svg) ![](https://img.shields.io/bower/v/editor.md.svg)
 
-H1 APP RICK AND MORTY  (Underline)
+
+
+
+APP RICK AND MORTY 
 =============
 
-
-###Images
-
-Image:
-
 ![](https://i.postimg.cc/6pzf9yxp/Microsoft-Teams-image-4.gif)
-
-> Follow your heart.
-
-![](https://pandao.github.io/editor.md/examples/images/8.jpg)
-
-
