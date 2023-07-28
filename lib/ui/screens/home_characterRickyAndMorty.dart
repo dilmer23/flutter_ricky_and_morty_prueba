@@ -3,7 +3,8 @@ import 'package:flutter_app_ricky_morty_prueba/config/provider/CharacterRickyAnd
 import 'package:flutter_app_ricky_morty_prueba/domain/models/characterRickyAndMorty/characterRickyAndMorty.dart';
 import 'package:flutter_app_ricky_morty_prueba/domain/models/locationRickyAndMorty/locationRickyAndMorty.dart';
 import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/LocationSearchDelegate.dart';
-import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_detalle_RickyAndMorty.dart';
+import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_detalle_Characters_RickyAndMorty.dart';
+// import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_detalle_RickyAndMorty.dart';
 import 'package:provider/provider.dart';
 
 class HomeCharacterRickyAndMorty extends StatefulWidget {
@@ -25,15 +26,17 @@ class _HomeCharacterRickyAndMortyState
 
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black,
         title: Row(
-          children: [
-            Image.asset(
-             'config/asset/imagenes/app_bar.png',
-              scale: 12,
+          children: const <Widget>[
+            CircleAvatar(
+              radius: 25,
+              backgroundImage: NetworkImage(
+                  'https://rickandmortyapi.com/api/character/avatar/19.jpeg'),
+              backgroundColor: Colors.transparent,
             ),
-            const SizedBox(
-              width: 10,
-            )
+            SizedBox(width: 10),
+            Text("Episodios Ricky And Morty")
           ],
         ),
         actions: [
@@ -83,10 +86,15 @@ class _HomeCharacterRickyAndMortyState
                           Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              const SizedBox(width: 25),
-                              Image.network(
-                                characterRickyAndMorty.image,
-                                width: 100,
+                              ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(10.0),
+                                  bottomLeft: Radius.circular(10.0),
+                                ),
+                                child: Image.network(
+                                  characterRickyAndMorty.image,
+                                  height: 145.0,
+                                ),
                               ),
                               const SizedBox(width: 30),
                               Column(
@@ -99,12 +107,31 @@ class _HomeCharacterRickyAndMortyState
                                       fontSize: 20,
                                     ),
                                   ),
-                                  Text(
-                                    characterRickyAndMorty.status.name,
-                                    style: const TextStyle(
-                                      fontSize: 18,
-                                    ),
-                                  ),
+                                  Row(
+                                    children: [
+                                      Container(
+                                        height: 7.0,
+                                        width: 7.0,
+                                        decoration: BoxDecoration(
+                                          color: characterRickyAndMorty
+                                                      .status.name
+                                                      .toString() ==
+                                                  'ALIVE'
+                                              ? Colors.green
+                                              : Colors.red,
+                                          shape: BoxShape.circle,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 15),
+                                      Text(
+                                        characterRickyAndMorty.status.name
+                                            .toString(),
+                                        style: const TextStyle(
+                                          fontSize: 18,
+                                        ),
+                                      ),
+                                    ],
+                                  )
                                   // const Text(
                                   //   "Episodios:",
                                   //   style: TextStyle(

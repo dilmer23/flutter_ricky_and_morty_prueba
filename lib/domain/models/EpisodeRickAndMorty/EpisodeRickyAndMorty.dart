@@ -4,78 +4,85 @@
 
 import 'dart:convert';
 
-RickyAndMortyEpisode rickyAndMortyEpisodeFromJson(String str) => RickyAndMortyEpisode.fromJson(json.decode(str));
+RickyAndMortyEpisode rickyAndMortyEpisodeFromJson(String str) =>
+    RickyAndMortyEpisode.fromJson(json.decode(str));
 
-String rickyAndMortyEpisodeToJson(RickyAndMortyEpisode data) => json.encode(data.toJson());
+String rickyAndMortyEpisodeToJson(RickyAndMortyEpisode data) =>
+    json.encode(data.toJson());
 
 class RickyAndMortyEpisode {
-    final Info info;
-    final List<EpisodeRickAndMorty> results;
+  final Info info;
+  final List<EpisodeRickAndMorty> results;
 
-    RickyAndMortyEpisode({
-        required this.info,
-        required this.results,
-    });
+  RickyAndMortyEpisode({
+    required this.info,
+    required this.results,
+  });
 
-    factory RickyAndMortyEpisode.fromJson(Map<String, dynamic> json) => RickyAndMortyEpisode(
+  factory RickyAndMortyEpisode.fromJson(Map<String, dynamic> json) =>
+      RickyAndMortyEpisode(
         info: Info.fromJson(json["info"]),
-        results: List<EpisodeRickAndMorty>.from(json["results"].map((x) => EpisodeRickAndMorty.fromJson(x))),
-    );
+        results: List<EpisodeRickAndMorty>.from(
+            json["results"].map((x) => EpisodeRickAndMorty.fromJson(x))),
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "info": info.toJson(),
         "results": List<dynamic>.from(results.map((x) => x.toJson())),
-    };
+      };
 }
 
 class Info {
-    final int count;
-    final int pages;
-    final String next;
-    final dynamic prev;
+  final int count;
+  final int pages;
+  final String next;
+  final dynamic prev;
 
-    Info({
-        required this.count,
-        required this.pages,
-        required this.next,
-        this.prev,
-    });
+  Info({
+    required this.count,
+    required this.pages,
+    required this.next,
+    this.prev,
+  });
 
-    factory Info.fromJson(Map<String, dynamic> json) => Info(
+  factory Info.fromJson(Map<String, dynamic> json) => Info(
         count: json["count"],
         pages: json["pages"],
         next: json["next"],
         prev: json["prev"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "count": count,
         "pages": pages,
         "next": next,
         "prev": prev,
-    };
+      };
 }
 
 class EpisodeRickAndMorty {
-    final int id;
-    final String name;
-    final String airDate;
-    final String episode;
-    final List<String> characters;
-    final String url;
-    final DateTime created;
+  final int id;
+  final String name;
+  final String airDate;
+  final String episode;
+  final List<String> characters;
+  final String url;
+  final DateTime created;
+  final String image;
 
-    EpisodeRickAndMorty({
-        required this.id,
-        required this.name,
-        required this.airDate,
-        required this.episode,
-        required this.characters,
-        required this.url,
-        required this.created,
-    });
+  EpisodeRickAndMorty({
+    required this.id,
+    required this.name,
+    required this.airDate,
+    required this.episode,
+    required this.characters,
+    required this.url,
+    required this.created,
+    required this.image,
+  });
 
-    factory EpisodeRickAndMorty.fromJson(Map<String, dynamic> json) => EpisodeRickAndMorty(
+  factory EpisodeRickAndMorty.fromJson(Map<String, dynamic> json) =>
+      EpisodeRickAndMorty(
         id: json["id"],
         name: json["name"],
         airDate: json["air_date"],
@@ -83,9 +90,10 @@ class EpisodeRickAndMorty {
         characters: List<String>.from(json["characters"].map((x) => x)),
         url: json["url"],
         created: DateTime.parse(json["created"]),
-    );
+        image: "https://rickandmortyapi.com/api/character/avatar/19.jpeg",
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "air_date": airDate,
@@ -93,5 +101,6 @@ class EpisodeRickAndMorty {
         "characters": List<dynamic>.from(characters.map((x) => x)),
         "url": url,
         "created": created.toIso8601String(),
-    };
+        "image": image,
+      };
 }

@@ -3,7 +3,8 @@ import 'package:flutter_app_ricky_morty_prueba/config/provider/EpisodeRickyAndMo
 import 'package:flutter_app_ricky_morty_prueba/domain/models/EpisodeRickAndMorty/EpisodeRickyAndMorty.dart';
 import 'package:flutter_app_ricky_morty_prueba/domain/models/locationRickyAndMorty/locationRickyAndMorty.dart';
 import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/LocationSearchDelegate.dart';
-import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_detalle_RickyAndMorty.dart';
+import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_detalle_Characters_RickyAndMorty.dart';
+import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_detalle_Episode_RickyAndMorty.dart';
 import 'package:provider/provider.dart';
 
 class HomeEpisodeRickyAndMorty extends StatefulWidget {
@@ -24,7 +25,19 @@ class _HomeEpisodeRickyAndMortyState extends State<HomeEpisodeRickyAndMorty> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Location Rick And Morty APP"),
+        backgroundColor: Colors.black,
+        title: Row(
+          children: const <Widget>[
+            CircleAvatar(
+              radius: 25,
+              backgroundImage: NetworkImage(
+                  'https://rickandmortyapi.com/api/character/avatar/19.jpeg'),
+              backgroundColor: Colors.transparent,
+            ),
+            SizedBox(width: 10),
+            Text("Episodios Ricky And Morty")
+          ],
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -52,19 +65,19 @@ class _HomeEpisodeRickyAndMortyState extends State<HomeEpisodeRickyAndMorty> {
             return ListView.builder(
               itemCount: allLocations.length,
               itemBuilder: (context, index) {
-                EpisodeRickAndMorty locationRickyAndMorty =
-                    allLocations[index];
+                EpisodeRickAndMorty episodeRickyAndMorty = allLocations[index];
                 return InkWell(
                   onTap: (() {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            DetailWidget(dato: locationRickyAndMorty),
+                            DetailWidgetEpisode(dato: episodeRickyAndMorty),
                       ),
                     ); // Aquí debes pasar el objeto CharacterRickyAndMorty adecuado
                   }),
                   child: Card(
+                    borderOnForeground: true,
                     elevation: 10,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -72,30 +85,42 @@ class _HomeEpisodeRickyAndMortyState extends State<HomeEpisodeRickyAndMorty> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const SizedBox(width: 25),
-                            Image.network(
-                              "https://rickandmortyapi.com/api/character/avatar/19.jpeg",
-                              width: 100,
+                            ClipRRect(
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(10.0),
+                                bottomLeft: Radius.circular(10.0),
+                              ),
+                              child: Image.network(
+                                'https://rickandmortyapi.com/api/character/avatar/19.jpeg',
+                                height: 145.0,
+                              ),
                             ),
-                            const SizedBox(width: 30),
+                            const SizedBox(width: 10),
+                            const SizedBox(height: 10),
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  locationRickyAndMorty.name,
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 17,
-                                  ),
+                                Row(
+                                  children: [
+                                    const Icon(Icons.movie),
+                                    Text(
+                                      episodeRickyAndMorty.name,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                                Text(
-                                  locationRickyAndMorty.episode,
-                                  style: const TextStyle(fontSize: 15),
-                                ),
-                                Text(
-                                  locationRickyAndMorty.airDate,
-                                  style: const TextStyle(fontSize: 15),
-                                ),
+                                Row(
+                                  children: [
+                                    const Icon(Icons.numbers),
+                                    Text(
+                                      episodeRickyAndMorty.episode,
+                                      style: const TextStyle(fontSize: 15),
+                                    ),
+                                  ],
+                                )
                               ],
                             )
                           ],

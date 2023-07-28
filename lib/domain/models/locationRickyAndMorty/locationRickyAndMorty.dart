@@ -60,6 +60,7 @@ class LocationRickyAndMorty {
     final List<String> residents;
     final String url;
     final DateTime created;
+    final String image;
 
     LocationRickyAndMorty({
         required this.id,
@@ -69,6 +70,7 @@ class LocationRickyAndMorty {
         required this.residents,
         required this.url,
         required this.created,
+        required this.image
     });
 
     factory LocationRickyAndMorty.fromJson(Map<String, dynamic> json) => LocationRickyAndMorty(
@@ -79,6 +81,7 @@ class LocationRickyAndMorty {
         residents: List<String>.from(json["residents"].map((x) => x)),
         url: json["url"],
         created: DateTime.parse(json["created"]),
+        image: "https://rickandmortyapi.com/api/character/avatar/19.jpeg"
     );
 
     Map<String, dynamic> toJson() => {
@@ -89,5 +92,6 @@ class LocationRickyAndMorty {
         "residents": List<dynamic>.from(residents.map((x) => x)),
         "url": url,
         "created": created.toIso8601String(),
+        "image": image
     };
 }

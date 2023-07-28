@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_ricky_morty_prueba/config/provider/locationRickyAndMorty_provider%20.dart';
 import 'package:flutter_app_ricky_morty_prueba/domain/models/locationRickyAndMorty/locationRickyAndMorty.dart';
 import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/LocationSearchDelegate.dart';
-import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_detalle_RickyAndMorty.dart';
+import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_detalle_Characters_RickyAndMorty.dart';
+import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_detalle_Location_RickyAndMorty.dart';
 import 'package:provider/provider.dart';
 
 class HomeLocationRickyAndMorty extends StatefulWidget {
@@ -23,7 +24,19 @@ class _HomeLocationRickyAndMortyState extends State<HomeLocationRickyAndMorty> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Location Rick And Morty APP"),
+        backgroundColor: Colors.black,
+        title: Row(
+          children: const <Widget>[
+            CircleAvatar(
+              radius: 25,
+              backgroundImage: NetworkImage(
+                  'https://rickandmortyapi.com/api/character/avatar/19.jpeg'),
+              backgroundColor: Colors.transparent,
+            ),
+            SizedBox(width: 10),
+            Text("Lugares Ricky And Morty")
+          ],
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -59,7 +72,7 @@ class _HomeLocationRickyAndMortyState extends State<HomeLocationRickyAndMorty> {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            DetailWidget(dato: locationRickyAndMorty),
+                            DetailWidgetLocation(dato: locationRickyAndMorty),
                       ),
                     ); // Aquí debes pasar el objeto CharacterRickyAndMorty adecuado
                   }),
@@ -71,10 +84,15 @@ class _HomeLocationRickyAndMortyState extends State<HomeLocationRickyAndMorty> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            const SizedBox(width: 25),
-                            Image.network(
-                              "https://rickandmortyapi.com/api/character/avatar/19.jpeg",
-                              width: 100,
+                            ClipRRect(
+                              borderRadius: const BorderRadius.only(
+                                topLeft: Radius.circular(10.0),
+                                bottomLeft: Radius.circular(10.0),
+                              ),
+                              child: Image.network(
+                                'https://rickandmortyapi.com/api/character/avatar/19.jpeg',
+                                height: 145.0,
+                              ),
                             ),
                             const SizedBox(width: 30),
                             Column(

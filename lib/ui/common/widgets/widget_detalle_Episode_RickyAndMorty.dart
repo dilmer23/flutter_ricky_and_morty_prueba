@@ -1,8 +1,6 @@
-// ignore: file_names
 import 'package:flutter/material.dart';
-import 'package:flutter_app_ricky_morty_prueba/domain/models/EpisodeRickAndMorty/EpisodeRickyAndMorty.dart';
 
-class DetailWidget extends StatelessWidget {
+class DetailWidgetEpisode extends StatelessWidget {
   final dynamic dato;
   final _characterInformationPadding = 16.0;
   final _characterInformationRightPadding = 20.0;
@@ -16,24 +14,20 @@ class DetailWidget extends StatelessWidget {
   final _characterOrigin = 'Origin';
   final _characterLocation = 'Location';
 
-  const DetailWidget({super.key, required this.dato});
+  const DetailWidgetEpisode({super.key, required this.dato});
 
   @override
   Widget build(BuildContext context) {
-    // String rutaImagen =
-    //     "https://rickandmortyapi.com/api/character/avatar/19.jpeg";
-    // dato == EpisodeRickAndMorty ? dato.image =rutaImagen : dato.image;
-    
-
     return Scaffold(
       appBar: AppBar(
-        title: Text(dato.name),
+        backgroundColor: Colors.black,
+        title: Text(dato.name.toString()),
       ),
       body: Padding(
         padding: EdgeInsets.all(_characterDetailsPadding),
         child: ListView(children: <Widget>[
           Padding(
-             padding: EdgeInsets.symmetric(horizontal: _characterDetailsPadding),
+            padding: EdgeInsets.symmetric(horizontal: _characterDetailsPadding),
             child: Column(
               children: [
                 Image.network(dato.image),
@@ -41,23 +35,18 @@ class DetailWidget extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                       horizontal: _characterDetailsPadding),
                   child: Text(
-                    dato.name,
+                    dato.name.toString(),
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: _characterNameSize),
                   ),
                 ),
-                  _buildInformationWidget(Icons.all_inclusive, _characterStatus,
-                      dato.status.toString()),
-                  _buildInformationWidget(
-                      Icons.pets, _characterSpecies, dato.species.toString()),
-                  _buildInformationWidget(Icons.person, _characterType, dato.type.toString()),
-                  _buildInformationWidget(
-                      Icons.wc, _characterGender, dato.gender.toString()),
-                  _buildInformationWidget(
-                      Icons.public, _characterOrigin, dato.origin.name),
-                  _buildInformationWidget(
-                      Icons.place, _characterLocation, dato.location.name),
+                _buildInformationWidget(Icons.all_inclusive, _characterStatus,
+                    dato.name.toString()),
+                _buildInformationWidget(
+                    Icons.pets, _characterSpecies, dato.episode.toString()),
+                _buildInformationWidget(
+                    Icons.person, _characterType, dato.airDate.toString()),
               ],
             ),
           ),
@@ -80,7 +69,7 @@ class DetailWidget extends StatelessWidget {
             color: Colors.grey[600],
           ),
         ),
-        _buildKeyValueWidget(key, value),
+        _buildKeyValueWidget(key, value)
       ],
     );
   }
