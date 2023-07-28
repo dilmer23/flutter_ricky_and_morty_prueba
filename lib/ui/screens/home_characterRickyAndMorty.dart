@@ -31,9 +31,7 @@ class _HomeCharacterRickyAndMortyState
           children: const <Widget>[
             CircleAvatar(
               radius: 25,
-              backgroundImage: NetworkImage(
-                  'https://rickandmortyapi.com/api/character/avatar/19.jpeg'),
-              backgroundColor: Colors.transparent,
+              backgroundImage:  AssetImage("lib/config/asset/imagenes/app_bar.png"),
             ),
             SizedBox(width: 10),
             Text("Episodios Ricky And Morty")

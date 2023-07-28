@@ -39,6 +39,15 @@ dependencies:
   http: ^0.13.4
   provider: ^5.0.0
   infinite_scroll_pagination: ^3.2.0
+  flutter_native_splash: ^2.2.11
+
+flutter_native_splash:
+  image: lib/config/asset/imagenes/app_bar.png
+  color: "#000000" # Color de fondo del splash (en código hexadecimal)
+  android: true
+  ios: true
+  android_gravity: center
+  ios_content_mode: center
 
 dev_dependencies:
   flutter_test:
@@ -63,8 +72,8 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - lib/config/asset/imagenes/app_bar.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

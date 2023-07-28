@@ -22,7 +22,7 @@ class RickyAndMortyApp extends StatefulWidget {
 }
 
 class _RickyAndMortyAppState extends State<RickyAndMortyApp> {
-  int _currentIndex = 2;
+  int _currentIndex = 0;
 
   final List<Widget> _screens = [
     const HomeCharacterRickyAndMorty(),

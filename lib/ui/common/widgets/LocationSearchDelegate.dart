@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_ricky_morty_prueba/domain/models/locationRickyAndMorty/locationRickyAndMorty.dart';
-import 'package:flutter_app_ricky_morty_prueba/domain/models/characterRickyAndMorty/characterRickyAndMorty.dart';
+
+import 'widget_detalle_Characters_RickyAndMorty.dart';
+
 class LocationSearchDelegate extends SearchDelegate<dynamic> {
   final List<dynamic> locations;
 
@@ -96,46 +98,13 @@ class LocationSearchDelegate extends SearchDelegate<dynamic> {
         return ListTile(
           title: Text(locationRickyAndMorty.name),
           onTap: () {
-            _showDetailsModal(context, locationRickyAndMorty);
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => DetailWidget(dato: locationRickyAndMorty),
+              ),
+            );
           },
-        );
-      },
-    );
-  }
-
-  void _showDetailsModal(BuildContext context, dynamic location) {
-    showModalBottomSheet(
-      context: context,
-      isScrollControlled: true, // Permite que el modal sea de tamaño completo
-      builder: (context) {
-        return Container(
-          // Estilo del modal
-          color: Colors.white,
-          padding: const EdgeInsets.all(16.0),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Image.network(
-                  "https://rickandmortyapi.com/api/character/avatar/486.jpeg",
-                  width: 200,
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  "Nombre: ${location.name}",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-                const SizedBox(height: 8),
-                Text("Tipo: ${location.type}"),
-                const SizedBox(height: 8),
-                // Text("Dimensión: ${location.dimension}"),
-                // Puedes agregar más información aquí según tus necesidades
-              ],
-            ),
-          ),
         );
       },
     );

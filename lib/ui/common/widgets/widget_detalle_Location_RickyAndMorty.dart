@@ -41,12 +41,12 @@ class DetailWidgetLocation extends StatelessWidget {
                         fontSize: _characterNameSize),
                   ),
                 ),
-                _buildInformationWidget(Icons.all_inclusive, _characterStatus,
+                _buildInformationWidget(Icons.width_normal_outlined, "Nombre",
                     dato.name.toString()),
                 _buildInformationWidget(
-                    Icons.pets, _characterSpecies, dato.type.toString()),
+                    Icons.egg_alt_rounded, "Origen", dato.type.toString()),
                 _buildInformationWidget(
-                    Icons.person, _characterType, dato.dimension.toString()),
+                    Icons.space_bar_sharp, "Localización", dato.dimension.toString()),
               ],
             ),
           ),

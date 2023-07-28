@@ -41,12 +41,12 @@ class DetailWidgetEpisode extends StatelessWidget {
                         fontSize: _characterNameSize),
                   ),
                 ),
-                _buildInformationWidget(Icons.all_inclusive, _characterStatus,
+                _buildInformationWidget(Icons.notification_important_rounded, "Nombre",
                     dato.name.toString()),
                 _buildInformationWidget(
-                    Icons.pets, _characterSpecies, dato.episode.toString()),
+                    Icons.numbers, "# Capitulo", dato.episode.toString()),
                 _buildInformationWidget(
-                    Icons.person, _characterType, dato.airDate.toString()),
+                    Icons.date_range, "Fecha Salida", dato.airDate.toString()),
               ],
             ),
           ),
