@@ -23,34 +23,37 @@ class DetailWidgetLocation extends StatelessWidget {
         backgroundColor: Colors.black,
         title: Text(dato.name.toString()),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(_characterDetailsPadding),
-        child: ListView(children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: _characterDetailsPadding),
-            child: Column(
-              children: [
-                Image.network(dato.image),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: _characterDetailsPadding),
-                  child: Text(
-                    dato.name.toString(),
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: _characterNameSize),
+      body: Container(
+        color: Colors.black,
+        child: Padding(
+          padding: EdgeInsets.all(_characterDetailsPadding),
+          child: ListView(children: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: _characterDetailsPadding),
+              child: Column(
+                children: [
+                  Image.network(dato.image),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: _characterDetailsPadding),
+                    child: Text(
+                      dato.name.toString(),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: _characterNameSize),
+                    ),
                   ),
-                ),
-                _buildInformationWidget(Icons.width_normal_outlined, "Nombre",
-                    dato.name.toString()),
-                _buildInformationWidget(
-                    Icons.egg_alt_rounded, "Origen", dato.type.toString()),
-                _buildInformationWidget(
-                    Icons.space_bar_sharp, "Localización", dato.dimension.toString()),
-              ],
+                  _buildInformationWidget(Icons.width_normal_outlined, "Nombre",
+                      dato.name.toString()),
+                  _buildInformationWidget(
+                      Icons.egg_alt_rounded, "Origen", dato.type.toString()),
+                  _buildInformationWidget(
+                      Icons.space_bar_sharp, "Localización", dato.dimension.toString()),
+                ],
+              ),
             ),
-          ),
-        ]),
+          ]),
+        ),
       ),
     );
   }
@@ -66,7 +69,7 @@ class DetailWidgetLocation extends StatelessWidget {
               left: _characterInformationPadding),
           child: Icon(
             icon,
-            color: Colors.grey[600],
+            color: Colors.white,
           ),
         ),
         _buildKeyValueWidget(key, value)
@@ -83,10 +86,10 @@ class DetailWidgetLocation extends StatelessWidget {
               EdgeInsets.only(bottom: _characterInformationKeyValuePadding),
           child: Text(
             key,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
           ),
         ),
-        Text(value),
+        Text(value,  style: const TextStyle(color: Colors.white),),
       ],
     );
   }

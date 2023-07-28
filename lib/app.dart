@@ -61,6 +61,12 @@ class _RickyAndMortyAppState extends State<RickyAndMortyApp> {
         home: Scaffold(
           body: _screens[_currentIndex],
           bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            backgroundColor: Colors.black,
+            selectedItemColor: Colors.white,
+            unselectedItemColor: Colors.white.withOpacity(.60),
+            selectedFontSize: 14,
+            unselectedFontSize: 14,
             currentIndex: _currentIndex,
             onTap: (index) {
               setState(() {

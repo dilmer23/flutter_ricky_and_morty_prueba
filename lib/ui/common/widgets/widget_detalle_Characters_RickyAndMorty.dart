@@ -27,55 +27,59 @@ class DetailWidget extends StatelessWidget {
         backgroundColor: Colors.black,
         title: Text(dato.name.toString()),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(_characterDetailsPadding),
-        child: ListView(children: <Widget>[
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: _characterDetailsPadding),
-            child: Column(
-              children: [
-                // Image.network(dato.image),
-                ClipRRect(
-                  borderRadius: const BorderRadius.only(
-                    topLeft: Radius.circular(10.0),
-                    bottomLeft: Radius.circular(10.0),
-                    bottomRight: Radius.circular(10.0),
-                    topRight: Radius.circular(10.0),
+      body: Container(
+        color: Colors.black,
+        child: Padding(
+          padding: EdgeInsets.all(_characterDetailsPadding),
+          child: ListView(children: <Widget>[
+            Padding(
+              padding:
+                  EdgeInsets.symmetric(horizontal: _characterDetailsPadding),
+              child: Column(
+                children: [
+                  // Image.network(dato.image),
+                  ClipRRect(
+                    borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(10.0),
+                      bottomLeft: Radius.circular(10.0),
+                      bottomRight: Radius.circular(10.0),
+                      topRight: Radius.circular(10.0),
+                    ),
+                    child: Image.network(
+                      dato.image,
+                      height: altoMaximo,
+                      width: anchoMaximo,
+                      fit: BoxFit.cover,
+                    ),
                   ),
-                  child: Image.network(
-                    dato.image,
-                    height: altoMaximo,
-                    width: anchoMaximo,
-                    fit: BoxFit.cover,
+                  const SizedBox(height: 15),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: _characterDetailsPadding),
+                    child: Text(
+                      dato.name,
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: _characterNameSize,color: Colors.white),
+                    ),
                   ),
-                ),
-                const SizedBox(height: 15),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: _characterDetailsPadding),
-                  child: Text(
-                    dato.name,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: _characterNameSize),
-                  ),
-                ),
-                _buildInformationWidget(Icons.all_inclusive, _characterStatus,
-                    dato.status.toString()),
-                _buildInformationWidget(
-                    Icons.pets, _characterSpecies, dato.species.toString()),
-                _buildInformationWidget(
-                    Icons.person, _characterType, dato.type.toString()),
-                _buildInformationWidget(
-                    Icons.wc, _characterGender, dato.gender.toString()),
-                _buildInformationWidget(Icons.public, _characterOrigin,
-                    dato.origin.name.toString()),
-                _buildInformationWidget(Icons.place, _characterLocation,
-                    dato.location.name.toString())
-              ],
+                  _buildInformationWidget(Icons.all_inclusive, _characterStatus,
+                      dato.status.toString()),
+                  _buildInformationWidget(
+                      Icons.pets, _characterSpecies, dato.species.toString()),
+                  _buildInformationWidget(
+                      Icons.person, _characterType, dato.type.toString()),
+                  _buildInformationWidget(
+                      Icons.wc, _characterGender, dato.gender.toString()),
+                  _buildInformationWidget(Icons.public, _characterOrigin,
+                      dato.origin.name.toString()),
+                  _buildInformationWidget(Icons.place, _characterLocation,
+                      dato.location.name.toString())
+                ],
+              ),
             ),
-          ),
-        ]),
+          ]),
+        ),
       ),
     );
   }
@@ -91,7 +95,7 @@ class DetailWidget extends StatelessWidget {
               left: _characterInformationPadding),
           child: Icon(
             icon,
-            color: Colors.grey[600],
+            color: Colors.white,
           ),
         ),
         _buildKeyValueWidget(key, value)
@@ -108,10 +112,14 @@ class DetailWidget extends StatelessWidget {
               EdgeInsets.only(bottom: _characterInformationKeyValuePadding),
           child: Text(
             key,
-            style: const TextStyle(fontWeight: FontWeight.bold),
+            style: const TextStyle(
+                fontWeight: FontWeight.bold, color: Colors.white),
           ),
         ),
-        Text(value),
+        Text(
+          value,
+          style: const TextStyle(color: Colors.white),
+        ),
       ],
     );
   }

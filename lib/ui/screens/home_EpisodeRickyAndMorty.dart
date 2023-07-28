@@ -3,6 +3,7 @@ import 'package:flutter_app_ricky_morty_prueba/config/provider/EpisodeRickyAndMo
 import 'package:flutter_app_ricky_morty_prueba/domain/models/EpisodeRickAndMorty/EpisodeRickyAndMorty.dart';
 import 'package:flutter_app_ricky_morty_prueba/domain/models/locationRickyAndMorty/locationRickyAndMorty.dart';
 import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/LocationSearchDelegate.dart';
+import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_cargando_custom.dart';
 import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_detalle_Characters_RickyAndMorty.dart';
 import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_detalle_Episode_RickyAndMorty.dart';
 import 'package:provider/provider.dart';
@@ -29,12 +30,15 @@ class _HomeEpisodeRickyAndMortyState extends State<HomeEpisodeRickyAndMorty> {
         title: Row(
           children: const <Widget>[
             CircleAvatar(
-              radius: 25,
+              radius: 30,
               backgroundImage:
                   AssetImage("lib/config/asset/imagenes/app_bar.png"),
             ),
             SizedBox(width: 10),
-            Text("Episodios Ricky And Morty")
+            Text(
+              "Episode",
+              style: TextStyle(fontSize: 35),
+            )
           ],
         ),
         actions: [
@@ -49,89 +53,93 @@ class _HomeEpisodeRickyAndMortyState extends State<HomeEpisodeRickyAndMorty> {
           ),
         ],
       ),
-      body: FutureBuilder<List<EpisodeRickAndMorty>>(
-        future: episodeRickyAndMortyProviders.episodeRickyAndMortyUseCase
-            .getAllEpisodeRickyAndMorty(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else if (snapshot.hasError) {
-            return Text("${snapshot.error}");
-          } else {
-            allLocations = snapshot.data!;
-            return ListView.builder(
-              itemCount: allLocations.length,
-              itemBuilder: (context, index) {
-                EpisodeRickAndMorty episodeRickyAndMorty = allLocations[index];
-                return InkWell(
-                  onTap: (() {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            DetailWidgetEpisode(dato: episodeRickyAndMorty),
-                      ),
-                    ); // Aquí debes pasar el objeto CharacterRickyAndMorty adecuado
-                  }),
-                  child: Card(
-                    borderOnForeground: true,
-                    elevation: 10,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                              borderRadius: const BorderRadius.only(
-                                topLeft: Radius.circular(10.0),
-                                bottomLeft: Radius.circular(10.0),
-                              ),
-                              child: Image.network(
-                                'https://rickandmortyapi.com/api/character/avatar/19.jpeg',
-                                height: 145.0,
-                              ),
-                            ),
-                            const SizedBox(width: 10),
-                            const SizedBox(height: 10),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  children: [
-                                    const Icon(Icons.movie),
-                                    Text(
-                                      episodeRickyAndMorty.name,
-                                      style: const TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 15,
+      body: Container(
+        color: Colors.black,
+        child: FutureBuilder<List<EpisodeRickAndMorty>>(
+          future: episodeRickyAndMortyProviders.episodeRickyAndMortyUseCase
+              .getAllEpisodeRickyAndMorty(),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(
+                child: CargandoCustom(),
+              );
+            } else if (snapshot.hasError) {
+              return Text("${snapshot.error}");
+            } else {
+              allLocations = snapshot.data!;
+              return ListView.builder(
+                itemCount: allLocations.length,
+                itemBuilder: (context, index) {
+                  EpisodeRickAndMorty episodeRickyAndMorty =
+                      allLocations[index];
+                  return InkWell(
+                    onTap: (() {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              DetailWidgetEpisode(dato: episodeRickyAndMorty),
+                        ),
+                      ); // Aquí debes pasar el objeto CharacterRickyAndMorty adecuado
+                    }),
+                    child: Card(
+                      borderOnForeground: true,
+                      elevation: 10,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const ClipRRect(
+                                  borderRadius: BorderRadius.only(
+                                    topLeft: Radius.circular(10.0),
+                                    bottomLeft: Radius.circular(10.0),
+                                  ),
+                                  child: CircleAvatar(
+                                    radius: 60,
+                                    backgroundImage: AssetImage(
+                                        "lib/config/asset/imagenes/listView.jpg"),
+                                  )),
+                              const SizedBox(width: 10),
+                              const SizedBox(height: 10),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.movie),
+                                      Text(
+                                        episodeRickyAndMorty.name,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15,
+                                        ),
                                       ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    const Icon(Icons.numbers),
-                                    Text(
-                                      episodeRickyAndMorty.episode,
-                                      style: const TextStyle(fontSize: 15),
-                                    ),
-                                  ],
-                                )
-                              ],
-                            )
-                          ],
-                        )
-                      ],
+                                    ],
+                                  ),
+                                  Row(
+                                    children: [
+                                      const Icon(Icons.numbers),
+                                      Text(
+                                        episodeRickyAndMorty.episode,
+                                        style: const TextStyle(fontSize: 15),
+                                      ),
+                                    ],
+                                  )
+                                ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
-            );
-          }
-        },
+                  );
+                },
+              );
+            }
+          },
+        ),
       ),
     );
   }
