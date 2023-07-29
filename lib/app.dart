@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_ricky_morty_prueba/config/provider/CharacterRickyAndMorty_provider.dart';
 import 'package:flutter_app_ricky_morty_prueba/config/provider/EpisodeRickyAndMorty_provider.dart';
+import 'package:flutter_app_ricky_morty_prueba/config/provider/FilterCharacterAndRickyAndMorty_provider.dart';
 import 'package:flutter_app_ricky_morty_prueba/config/provider/locationRickyAndMorty_provider%20.dart';
 import 'package:flutter_app_ricky_morty_prueba/config/theme/theme_app.dart';
+import 'package:flutter_app_ricky_morty_prueba/data/driver_adapter/rickyAndMortyFilterChracter_api.dart';
+import 'package:flutter_app_ricky_morty_prueba/domain/models/characterRickyAndMorty/filterCharacterRickyAndMorty.dart';
+import 'package:flutter_app_ricky_morty_prueba/domain/use_case/CharacterRickyAndMorty/characterFilterRickyAndMorty_use_case.dart';
 import 'package:flutter_app_ricky_morty_prueba/domain/use_case/CharacterRickyAndMorty/characterRickyAndMort_use_case.dart';
 import 'package:flutter_app_ricky_morty_prueba/domain/use_case/EpisodeRickyAndMorty/richyAndMortyEpisode_use_case.dart';
 import 'package:flutter_app_ricky_morty_prueba/domain/use_case/locationRickyAndMorty/richyAndMortyLocation_use_case.dart';
@@ -34,6 +38,13 @@ class _RickyAndMortyAppState extends State<RickyAndMortyApp> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(
+          create: (context) => FilterCharacterRickyAndMortyProviders(
+            filtercharacterRickyAndMortyUseCase:
+                FilterCharacterRickyAndMortyUseCase(
+                    FilterCharacterRickyAndMortyApi()),
+          ),
+        ),
         ChangeNotifierProvider(
           create: (context) => LocationRickyAndMortyProviders(
             locationRickyAndMortyUseCase: LocationRickyAndMortyUseCase(

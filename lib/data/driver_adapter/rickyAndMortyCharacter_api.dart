@@ -1,12 +1,11 @@
 
 import 'dart:developer';
-
 import 'package:flutter_app_ricky_morty_prueba/data/driver_adapter/errors/rickyAndMortyCharacter_api_errors.dart';
 import 'package:flutter_app_ricky_morty_prueba/domain/models/characterRickyAndMorty/characterRickyAndMorty.dart';
 import 'package:flutter_app_ricky_morty_prueba/domain/models/characterRickyAndMorty/geteway/characterRickyAndMorty_geteway.dart';
 import 'package:http/http.dart' as http;
 
-class CharacterRickyAndMortyApi extends CharacterRickyAndMortyGateway {
+class CharacterRickyAndMortyApi implements CharacterRickyAndMortyGateway {
   @override
   Future<List<CharacterRickyAndMorty>> getCharacterRickyAndMorty(pagina) async {
     Uri url = Uri.parse("https://rickandmortyapi.com/api/character?page=$pagina");

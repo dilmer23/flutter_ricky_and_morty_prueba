@@ -17,11 +17,12 @@ class HomeCharacterRickyAndMorty extends StatefulWidget {
 class _HomeCharacterRickyAndMortyState
     extends State<HomeCharacterRickyAndMorty> {
   List<CharacterRickyAndMorty> allLocations = [];
+  List<dynamic> filteredList = [];
   int pagina = 2;
   bool isLoading = false;
   bool reachedMaxPages =
       false; // New variable to track if max pages are reached
-  ScrollController _scrollController = ScrollController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -69,9 +70,6 @@ class _HomeCharacterRickyAndMortyState
 
   @override
   Widget build(BuildContext context) {
-    final characterRickyAndMortyProviders =
-        Provider.of<CharacterRickyAndMortyProviders>(context);
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -96,10 +94,15 @@ class _HomeCharacterRickyAndMortyState
                 context: context,
                 delegate: LocationSearchDelegate(
                     locations: allLocations,
-                    widget: DetailWidget(dato: allLocations.indexOf(allLocations[0]))),
+                    widget: DetailWidget(
+                        dato: allLocations[0])),
               );
             },
             icon: const Icon(Icons.search),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.security_update_warning_sharp),
           ),
         ],
       ),
@@ -211,9 +214,7 @@ class _HomeCharacterRickyAndMortyState
               );
             } else {
               return Center(
-                child: isLoading
-                    ? const CargandoCustom()
-                    : const SizedBox(),
+                child: isLoading ? const CargandoCustom() : const SizedBox(),
               );
             }
           },
