@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_ricky_morty_prueba/domain/models/locationRickyAndMorty/locationRickyAndMorty.dart';
 
-import 'widget_detalle_Characters_RickyAndMorty.dart';
 
 class LocationSearchDelegate extends SearchDelegate<dynamic> {
   final List<dynamic> locations;
+  final Widget widget;
 
-  LocationSearchDelegate(this.locations);
+  LocationSearchDelegate( {required this.locations,required this.widget});
+
 
   @override
   List<Widget> buildActions(BuildContext context) {
@@ -42,43 +43,35 @@ class LocationSearchDelegate extends SearchDelegate<dynamic> {
       itemCount: results.length,
       itemBuilder: (context, index) {
         LocationRickyAndMorty locationRickyAndMorty = results[index];
-        return Card(
-          elevation: 10,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  Image.network(
-                    "https://rickandmortyapi.com/api/character/avatar/486.jpeg",
-                    width: 80,
+        return Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Image.network(
+              "https://rickandmortyapi.com/api/character/avatar/486.jpeg",
+              width: 80,
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  locationRickyAndMorty.name,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17,
                   ),
-                  Column(
-                    mainAxisSize: MainAxisSize.max,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        locationRickyAndMorty.name,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 17,
-                        ),
-                      ),
-                      Text(
-                        locationRickyAndMorty.type,
-                        style: const TextStyle(fontSize: 15),
-                      ),
-                      Text(
-                        locationRickyAndMorty.dimension,
-                        style: const TextStyle(fontSize: 15),
-                      ),
-                    ],
-                  )
-                ],
-              )
-            ],
-          ),
+                ),
+                Text(
+                  locationRickyAndMorty.type,
+                  style: const TextStyle(fontSize: 15),
+                ),
+                Text(
+                  locationRickyAndMorty.dimension,
+                  style: const TextStyle(fontSize: 15),
+                ),
+              ],
+            )
+          ],
         );
       },
     );
@@ -101,7 +94,7 @@ class LocationSearchDelegate extends SearchDelegate<dynamic> {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => DetailWidget(dato: locationRickyAndMorty),
+                builder: (context) => widget,
               ),
             );
           },

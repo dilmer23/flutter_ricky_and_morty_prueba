@@ -5,7 +5,7 @@ class EpisodeRickyAndMortyUseCase {
   final EpisodeRickyAndMortyGateway _episodeRickyAndMortyGateway;
   //contrcutor donde pida la entreda de _pokeGetaway
  EpisodeRickyAndMortyUseCase(this._episodeRickyAndMortyGateway);
-  Future<List<EpisodeRickAndMorty>> getAllEpisodeRickyAndMorty() {
-    return _episodeRickyAndMortyGateway.getEpisodeRickyAndMorty();
+  Future<List<EpisodeRickAndMorty>> getAllEpisodeRickyAndMorty(pagina) {
+    return _episodeRickyAndMortyGateway.getEpisodeRickyAndMorty(pagina);
   }
 }

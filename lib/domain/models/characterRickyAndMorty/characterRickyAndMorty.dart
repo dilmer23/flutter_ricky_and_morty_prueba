@@ -1,3 +1,8 @@
+// To parse this JSON data, do
+//
+//     final rickyAndMortyCharacter = rickyAndMortyCharacterFromJson(jsonString);
+
+import 'package:meta/meta.dart';
 import 'dart:convert';
 
 RickyAndMortyCharacter rickyAndMortyCharacterFromJson(String str) => RickyAndMortyCharacter.fromJson(json.decode(str));
@@ -5,8 +10,8 @@ RickyAndMortyCharacter rickyAndMortyCharacterFromJson(String str) => RickyAndMor
 String rickyAndMortyCharacterToJson(RickyAndMortyCharacter data) => json.encode(data.toJson());
 
 class RickyAndMortyCharacter {
-    final Info info;
-    final List<CharacterRickyAndMorty> results;
+    Info info;
+    List<CharacterRickyAndMorty> results;
 
     RickyAndMortyCharacter({
         required this.info,
@@ -25,16 +30,16 @@ class RickyAndMortyCharacter {
 }
 
 class Info {
-    final int count;
-    final int pages;
-    final String next;
-    final dynamic prev;
+    int count;
+    int pages;
+    String next;
+    String prev;
 
     Info({
         required this.count,
         required this.pages,
         required this.next,
-        this.prev,
+        required this.prev,
     });
 
     factory Info.fromJson(Map<String, dynamic> json) => Info(
@@ -53,18 +58,18 @@ class Info {
 }
 
 class CharacterRickyAndMorty {
-    final int id;
-    final String name;
-    final Status status;
-    final Species species;
-    final String type;
-    final Gender gender;
-    final Location origin;
-    final Location location;
-    final String image;
-    final List<String> episode;
-    final String url;
-    final DateTime created;
+    int id;
+    String name;
+    Status status;
+    String species;
+    String type;
+    Gender gender;
+    Location origin;
+    Location location;
+    String image;
+    List<String> episode;
+    String url;
+    DateTime created;
 
     CharacterRickyAndMorty({
         required this.id,
@@ -85,7 +90,7 @@ class CharacterRickyAndMorty {
         id: json["id"],
         name: json["name"],
         status: statusValues.map[json["status"]]!,
-        species: speciesValues.map[json["species"]]!,
+        species: json["species"],
         type: json["type"],
         gender: genderValues.map[json["gender"]]!,
         origin: Location.fromJson(json["origin"]),
@@ -100,7 +105,7 @@ class CharacterRickyAndMorty {
         "id": id,
         "name": name,
         "status": statusValues.reverse[status],
-        "species": speciesValues.reverse[species],
+        "species": species,
         "type": type,
         "gender": genderValues.reverse[gender],
         "origin": origin.toJson(),
@@ -114,19 +119,21 @@ class CharacterRickyAndMorty {
 
 enum Gender {
     FEMALE,
+    GENDERLESS,
     MALE,
     UNKNOWN
 }
 
 final genderValues = EnumValues({
     "Female": Gender.FEMALE,
+    "Genderless": Gender.GENDERLESS,
     "Male": Gender.MALE,
     "unknown": Gender.UNKNOWN
 });
 
 class Location {
-    final String name;
-    final String url;
+    String name;
+    String url;
 
     Location({
         required this.name,
@@ -143,16 +150,6 @@ class Location {
         "url": url,
     };
 }
-
-enum Species {
-    ALIEN,
-    HUMAN
-}
-
-final speciesValues = EnumValues({
-    "Alien": Species.ALIEN,
-    "Human": Species.HUMAN
-});
 
 enum Status {
     ALIVE,

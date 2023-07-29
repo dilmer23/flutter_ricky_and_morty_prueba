@@ -5,8 +5,8 @@ import 'package:http/http.dart' as http;
 
 class EpisodenRickyAndMortyApi extends EpisodeRickyAndMortyGateway {
   @override
-  Future<List<EpisodeRickAndMorty>> getEpisodeRickyAndMorty() async {
-    Uri url = Uri.parse("https://rickandmortyapi.com/api/episode");
+  Future<List<EpisodeRickAndMorty>> getEpisodeRickyAndMorty(pagina) async {
+    Uri url = Uri.parse("https://rickandmortyapi.com/api/episode?page=$pagina");
     // ignore: non_constant_identifier_names
     final response = await http.get(url);
     if (response.statusCode >= 200 && response.statusCode <= 202){

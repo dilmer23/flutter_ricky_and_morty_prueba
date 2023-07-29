@@ -6,7 +6,7 @@ class LocationRickyAndMortyUseCase {
   final LocationRickyAndMortyGateway _locationRickyAndMortyGateway;
   //contrcutor donde pida la entreda de _pokeGetaway
   LocationRickyAndMortyUseCase(this._locationRickyAndMortyGateway);
-  Future<List<LocationRickyAndMorty>> getAllLocationRickyAndMorty() {
-    return _locationRickyAndMortyGateway.getLocationRickyAndMorty();
+  Future<List<LocationRickyAndMorty>> getAllLocationRickyAndMorty(pagina) {
+    return _locationRickyAndMortyGateway.getLocationRickyAndMorty(pagina);
   }
 }

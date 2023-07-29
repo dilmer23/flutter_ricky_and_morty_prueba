@@ -17,6 +17,55 @@ class HomeLocationRickyAndMorty extends StatefulWidget {
 
 class _HomeLocationRickyAndMortyState extends State<HomeLocationRickyAndMorty> {
   List<LocationRickyAndMorty> allLocations = [];
+  int pagina = 1;
+  bool isLoading = false;
+  bool reachedMaxPages =
+      false; // New variable to track if max pages are reached
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+    loadMoreData();
+  }
+
+  Future<void> loadMoreData() async {
+    if (!isLoading && !reachedMaxPages && pagina <= 7) {
+      setState(() {
+        isLoading = true;
+      });
+      final characterRickyAndMortyProviders =
+          Provider.of<LocationRickyAndMortyProviders>(context, listen: false);
+      List<LocationRickyAndMorty> newData =
+          await characterRickyAndMortyProviders.locationRickyAndMortyUseCase
+              .getAllLocationRickyAndMorty(pagina);
+      if (newData.isNotEmpty) {
+        setState(() {
+          allLocations.addAll(newData);
+          pagina++;
+          isLoading = false;
+        });
+      } else {
+        reachedMaxPages = true; // No more data to load
+        isLoading = false;
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_scrollListener);
+    _scrollController.dispose();
+    super.dispose();
+  }
+
+  void _scrollListener() {
+    if (_scrollController.position.pixels ==
+        _scrollController.position.maxScrollExtent) {
+      loadMoreData();
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,53 +73,48 @@ class _HomeLocationRickyAndMortyState extends State<HomeLocationRickyAndMorty> {
         Provider.of<LocationRickyAndMortyProviders>(context);
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.black,
-        title: Row(
-          children: const <Widget>[
-            CircleAvatar(
-              radius: 30,
-              backgroundImage:
-                  AssetImage("lib/config/asset/imagenes/app_bar.png"),
+        appBar: AppBar(
+          backgroundColor: Colors.black,
+          title: Row(
+            children: const <Widget>[
+              CircleAvatar(
+                radius: 30,
+                backgroundImage:
+                    AssetImage("lib/config/asset/imagenes/app_bar.png"),
+              ),
+              SizedBox(width: 10),
+              Text(
+                "Location",
+                style: TextStyle(fontSize: 35),
+              )
+            ],
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: LocationSearchDelegate(
+                      locations: allLocations,
+                      widget: DetailWidgetLocation(
+                        dato: allLocations.first,
+                      )),
+                );
+              },
+              icon: const Icon(Icons.search),
             ),
-            SizedBox(width: 10),
-            Text(
-              "Location",
-              style: TextStyle(fontSize: 35),
-            )
           ],
         ),
-        actions: [
-          IconButton(
-            onPressed: () {
-              showSearch(
-                context: context,
-                delegate: LocationSearchDelegate(allLocations),
-              );
-            },
-            icon: const Icon(Icons.search),
-          ),
-        ],
-      ),
-      body: Container(
-        color: Colors.black,
-        child: FutureBuilder<List<LocationRickyAndMorty>>(
-          future: locationRickyAndMortyProviders.locationRickyAndMortyUseCase
-              .getAllLocationRickyAndMorty(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(
-                child: CargandoCustom(),
-              );
-            } else if (snapshot.hasError) {
-              return Text("${snapshot.error}");
-            } else {
-              allLocations = snapshot.data!;
-              return ListView.builder(
-                itemCount: allLocations.length,
-                itemBuilder: (context, index) {
+        body: Container(
+            color: Colors.black,
+            child: ListView.builder(
+              controller: _scrollController,
+              itemCount: allLocations.length + 1,
+              itemBuilder: (context, index) {
+                if (index < allLocations.length) {
                   LocationRickyAndMorty locationRickyAndMorty =
                       allLocations[index];
+
                   return InkWell(
                     onTap: (() {
                       Navigator.push(
@@ -126,12 +170,13 @@ class _HomeLocationRickyAndMortyState extends State<HomeLocationRickyAndMorty> {
                       ),
                     ),
                   );
-                },
-              );
-            }
-          },
-        ),
-      ),
-    );
+                } else {
+                  return Center(
+                    child:
+                        isLoading ? const CargandoCustom() : const SizedBox(),
+                  );
+                }
+              },
+            )));
   }
 }

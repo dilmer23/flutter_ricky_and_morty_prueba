@@ -7,7 +7,7 @@ class CharacterRickyAndMortyUseCase {
   final CharacterRickyAndMortyGateway _characterRickyAndMortyGateway;
   //contrcutor donde pida la entreda de 
   CharacterRickyAndMortyUseCase(this._characterRickyAndMortyGateway);
-  Future<List<CharacterRickyAndMorty>> getAllCharacterRickyAndMorty() {
-    return _characterRickyAndMortyGateway.getCharacterRickyAndMorty();
+  Future<List<CharacterRickyAndMorty>> getAllCharacterRickyAndMorty(pagina) {
+    return _characterRickyAndMortyGateway.getCharacterRickyAndMorty(pagina);
   }
 }
