@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_app_ricky_morty_prueba/config/provider/CharacterRickyAndMorty_provider.dart';
 import 'package:flutter_app_ricky_morty_prueba/domain/models/characterRickyAndMorty/characterRickyAndMorty.dart';
 import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/LocationSearchDelegate.dart';
+import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_buscadorPorNombre.dart';
 import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_cargando_custom.dart';
 import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_detalle_Characters_RickyAndMorty.dart';
 import 'package:provider/provider.dart';
@@ -88,21 +89,27 @@ class _HomeCharacterRickyAndMortyState
           ],
         ),
         actions: [
+          // IconButton(
+          //   onPressed: () {
+          //     showSearch(
+          //       context: context,
+          //       delegate: LocationSearchDelegate(
+          //           locations: allLocations,
+          //           widget: DetailWidget(dato: allLocations[0])),
+          //     );
+          //   },
+            // icon: const Icon(Icons.search),
+          // ),
           IconButton(
             onPressed: () {
-              showSearch(
-                context: context,
-                delegate: LocationSearchDelegate(
-                    locations: allLocations,
-                    widget: DetailWidget(
-                        dato: allLocations[0])),
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>  const BuscadorPorNombre(),
+                ),
               );
             },
             icon: const Icon(Icons.search),
-          ),
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.security_update_warning_sharp),
           ),
         ],
       ),

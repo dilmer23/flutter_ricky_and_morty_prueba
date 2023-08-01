@@ -1,8 +1,3 @@
-// To parse this JSON data, do
-//
-//     final rickyAndMortyCharacterFilter = rickyAndMortyCharacterFilterFromJson(jsonString);
-
-import 'package:meta/meta.dart';
 import 'dart:convert';
 
 RickyAndMortyCharacterFilter rickyAndMortyCharacterFilterFromJson(String str) => RickyAndMortyCharacterFilter.fromJson(json.decode(str));
@@ -32,7 +27,7 @@ class RickyAndMortyCharacterFilter {
 class Info {
     int count;
     int pages;
-    String next;
+    dynamic next;
     dynamic prev;
 
     Info({
@@ -60,10 +55,10 @@ class Info {
 class FilterCharacterRickyAndMorty {
     int id;
     String name;
-    Status status;
-    Species species;
-    Type type;
-    Gender gender;
+    String status;
+    String species;
+    String type;
+    String gender;
     Location origin;
     Location location;
     String image;
@@ -89,10 +84,10 @@ class FilterCharacterRickyAndMorty {
     factory FilterCharacterRickyAndMorty.fromJson(Map<String, dynamic> json) => FilterCharacterRickyAndMorty(
         id: json["id"],
         name: json["name"],
-        status: statusValues.map[json["status"]]!,
-        species: speciesValues.map[json["species"]]!,
-        type: typeValues.map[json["type"]]!,
-        gender: genderValues.map[json["gender"]]!,
+        status: json["status"],
+        species: json["species"],
+        type: json["type"],
+        gender: json["gender"],
         origin: Location.fromJson(json["origin"]),
         location: Location.fromJson(json["location"]),
         image: json["image"],
@@ -104,10 +99,10 @@ class FilterCharacterRickyAndMorty {
     Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
-        "status": statusValues.reverse[status],
-        "species": speciesValues.reverse[species],
-        "type": typeValues.reverse[type],
-        "gender": genderValues.reverse[gender],
+        "status": status,
+        "species": species,
+        "type": type,
+        "gender": gender,
         "origin": origin.toJson(),
         "location": location.toJson(),
         "image": image,
@@ -116,14 +111,6 @@ class FilterCharacterRickyAndMorty {
         "created": created.toIso8601String(),
     };
 }
-
-enum Gender {
-    MALE
-}
-
-final genderValues = EnumValues({
-    "Male": Gender.MALE
-});
 
 class Location {
     String name;
@@ -143,56 +130,4 @@ class Location {
         "name": name,
         "url": url,
     };
-}
-
-enum Species {
-    ALIEN,
-    CRONENBERG,
-    HUMAN,
-    HUMANOID
-}
-
-final speciesValues = EnumValues({
-    "Alien": Species.ALIEN,
-    "Cronenberg": Species.CRONENBERG,
-    "Human": Species.HUMAN,
-    "Humanoid": Species.HUMANOID
-});
-
-enum Status {
-    ALIVE,
-    DEAD,
-    UNKNOWN
-}
-
-final statusValues = EnumValues({
-    "Alive": Status.ALIVE,
-    "Dead": Status.DEAD,
-    "unknown": Status.UNKNOWN
-});
-
-enum Type {
-    EMPTY,
-    FISH_PERSON,
-    HUMAN_WITH_ANTENNAE,
-    ROBOT
-}
-
-final typeValues = EnumValues({
-    "": Type.EMPTY,
-    "Fish-Person": Type.FISH_PERSON,
-    "Human with antennae": Type.HUMAN_WITH_ANTENNAE,
-    "Robot": Type.ROBOT
-});
-
-class EnumValues<T> {
-    Map<String, T> map;
-    late Map<T, String> reverseMap;
-
-    EnumValues(this.map);
-
-    Map<T, String> get reverse {
-        reverseMap = map.map((k, v) => MapEntry(v, k));
-        return reverseMap;
-    }
 }

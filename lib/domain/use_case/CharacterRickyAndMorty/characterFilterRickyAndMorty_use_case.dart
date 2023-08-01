@@ -7,8 +7,8 @@ class FilterCharacterRickyAndMortyUseCase {
   final FilterCharacterRickyAndMortyGateway _filtercharacterRickyAndMortyGateway;
   //contrcutor donde pida la entreda de filtro por nombre
   FilterCharacterRickyAndMortyUseCase(this._filtercharacterRickyAndMortyGateway);
-  Future<List<FilterCharacterRickyAndMorty>> getAllFilterCharacterRickyAndMorty(name) {
-    return _filtercharacterRickyAndMortyGateway.getFilterCharacterRickyAndMorty(name);
+  Future<List<FilterCharacterRickyAndMorty>> getAllFilterCharacterRickyAndMorty(name,filter) {
+    return _filtercharacterRickyAndMortyGateway.getFilterCharacterRickyAndMorty(name,filter);
   }
 }
 

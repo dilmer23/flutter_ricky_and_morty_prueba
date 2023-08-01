@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_ricky_morty_prueba/config/provider/CharacterRickyAndMorty_provider.dart';
+import 'package:flutter_app_ricky_morty_prueba/domain/models/characterRickyAndMorty/characterRickyAndMorty.dart';
 import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/buildInformationWidget.dart';
 import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/clipRreactWidget.dart';
+import 'package:provider/provider.dart';
 
 class DetailWidgetEpisode extends StatelessWidget {
   final dynamic dato;
@@ -11,6 +14,10 @@ class DetailWidgetEpisode extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final characterRickyAndMortyProviders =
+          Provider.of<CharacterRickyAndMortyProviders>(context, listen: false);
+      // List<CharacterRickyAndMorty> newData = characterRickyAndMortyProviders.characterRickyAndMortyUseCase
+      //         .getAllCharacterRickyAndMorty(pagina);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,

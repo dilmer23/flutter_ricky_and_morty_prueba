@@ -46,10 +46,6 @@ class LocationSearchDelegate extends SearchDelegate<dynamic> {
         return Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Image.network(
-              "https://rickandmortyapi.com/api/character/avatar/486.jpeg",
-              width: 80,
-            ),
             Column(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

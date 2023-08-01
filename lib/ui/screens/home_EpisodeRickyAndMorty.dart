@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_app_ricky_morty_prueba/config/provider/EpisodeRickyAndMorty_provider.dart';
 import 'package:flutter_app_ricky_morty_prueba/domain/models/EpisodeRickAndMorty/EpisodeRickyAndMorty.dart';
-import 'package:flutter_app_ricky_morty_prueba/domain/models/locationRickyAndMorty/locationRickyAndMorty.dart';
 import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/LocationSearchDelegate.dart';
 import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_cargando_custom.dart';
-import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_detalle_Characters_RickyAndMorty.dart';
 import 'package:flutter_app_ricky_morty_prueba/ui/common/widgets/widget_detalle_Episode_RickyAndMorty.dart';
 import 'package:provider/provider.dart';
 
@@ -70,9 +68,6 @@ class _HomeEpisodeRickyAndMortyState extends State<HomeEpisodeRickyAndMorty> {
 
   @override
   Widget build(BuildContext context) {
-    final episodeRickyAndMortyProviders =
-        Provider.of<EpisodeRickyAndMortyProviders>(context);
-
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
@@ -94,6 +89,8 @@ class _HomeEpisodeRickyAndMortyState extends State<HomeEpisodeRickyAndMorty> {
             IconButton(
               onPressed: () {
                 showSearch(
+                  useRootNavigator: true,
+                  query: "",
                   context: context,
                   delegate: LocationSearchDelegate(
                       widget: DetailWidgetEpisode(dato: allLocations.first),
